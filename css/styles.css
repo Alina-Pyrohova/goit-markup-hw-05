@@ -18,6 +18,7 @@
   --secondary-text-color: #000000;
   --background-color: #f5f5f5;
   --icon-color: #afb1b8;
+  --fill-svg-color: #000000;
 }
 
 h1,
@@ -90,6 +91,30 @@ body {
 }
 
 /* site nav */
+
+.after-line {
+  position: relative;
+}
+
+/* .after-line:hover::after {
+  width: 100%;
+  height: 4px;
+  opacity: 1;
+} */
+
+.after-line::after {
+  position: absolute;
+
+  content: '';
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+
+  background: var(--accent-text-color);
+
+  border-radius: 2px;
+}
+
 .site-nav {
   display: flex;
   padding-left: 0;
@@ -111,6 +136,8 @@ body {
   padding-bottom: 32px;
 
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .site-nav .link:hover,
 .site-nav .link:focus {
@@ -141,6 +168,8 @@ body {
   padding-bottom: 32px;
 
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-nav .item + .item {
@@ -219,12 +248,81 @@ body {
   padding: 10px 32px;
   min-width: 216px;
   border: transparent;
+  transition: background-color 250ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/*.button-title:hover,
+.button-title:hover,
 .button-title:focus {
-    color: var(--accent-text-color)
-}*/
+  background: var(--accent-text-color);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal*/
+
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+
+  transform: scale(1);
+
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: scale(0);
+}
+
+.modal {
+  min-width: 528px;
+  min-height: 581px;
+  background: var(--primary-background-color);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.modal-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  background: var(--primary-background-color);
+  border: none;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  cursor: pointer;
+
+  transition: background-color 250ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-button:hover,
+.modal-button:focus {
+  background: var(--primary-background-color);
+}
+
+.icon-modal {
+  fill: var(--fill-svg-color);
+}
 
 /*Якості*/
 
@@ -311,6 +409,27 @@ body {
   margin-left: 30px;
 }
 
+.section .item-project {
+  position: relative;
+}
+
+.project-name {
+  position: absolute;
+  bottom: 0;
+
+  font-size: inherit;
+  line-height: 1.17;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  width: 100%;
+  padding: 27px 15px;
+
+  color: var(--primary-background-color);
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
 /*Команда*/
 
 .list-team {
@@ -382,6 +501,8 @@ body {
 
   display: flex;
   justify-content: center;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-links:hover,
@@ -421,6 +542,8 @@ body {
   height: 92px;
   align-items: center;
   justify-content: center;
+
+  transition: fill 250ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .icon-clients {
@@ -472,6 +595,8 @@ body {
   line-height: 1.71;
   letter-spacing: 0.03em;
   text-decoration: none;
+
+  transition: fill 250ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .address-list .address-link + .address-link {
@@ -520,6 +645,8 @@ body {
   padding: 6px 22px;
   border-radius: 4px;
   border: none;
+
+  transition: color 250ms, background-color 250ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button-filter:hover,
@@ -544,6 +671,8 @@ body {
   margin-left: 9px;
 }
 
+/* work-list */
+
 .work-list {
   display: flex;
   flex-wrap: wrap;
@@ -557,6 +686,33 @@ body {
   background: var(--primary-background-color);
 
   flex-basis: calc((100% - 60px) / 3);
+}
+
+/* work-card */
+
+.work-wrap-details {
+  position: relative;
+  overflow: hidden;
+}
+
+.work-item:hover .card-details {
+  transform: translateY(0);
+}
+
+.card-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translateY(100%);
+  transition: transform 250ms;
+
+  padding: 63px 24px;
+  background-color: rgba(33, 150, 243, 0.9);
+
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--primary-background-color);
 }
 
 .border {
